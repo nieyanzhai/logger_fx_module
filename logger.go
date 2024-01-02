@@ -12,8 +12,11 @@ import (
 
 var (
 	logPath = path.Join("./config", "log.json")
-	Logger  *zap.SugaredLogger
 )
+
+func New() *zap.SugaredLogger {
+	return newLogger()
+}
 
 func newLogger() *zap.SugaredLogger {
 	cfg, err := loadConfig(logPath)
@@ -21,8 +24,7 @@ func newLogger() *zap.SugaredLogger {
 		panic(err)
 	}
 	lumberjackLogger := newLumberjackLogger(cfg)
-	Logger = newZapLogger(lumberjackLogger)
-	return Logger
+	return newZapLogger(lumberjackLogger)
 }
 
 func newZapLogger(w io.Writer) *zap.SugaredLogger {
