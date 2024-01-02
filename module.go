@@ -2,8 +2,7 @@ package logger_fx_module
 
 import "go.uber.org/fx"
 
-// Add Logger to fx module
-var module = fx.Module(
+var Module = fx.Module(
 	"logger",
 	fx.Provide(
 		newLogger,
